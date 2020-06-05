@@ -7,7 +7,7 @@ Makes it easier to handle your benchmarks, run them on CI and save the results i
 Install as a script with deno install, use in a CI job like [this](./.github/workflows/benchmarks.yml), or run it by hand.
 
 ```batch
-deno run -A --unstable https://raw.githubusercontent.com/littletof/deno_bencher/master/run_benchmarks.ts --benches=./benchmarks/benchmarks.ts --json=./benchmarks/benchmarks.json --formatted=./benchmarks/benchmarks.txt -s -os -dv -date -metrics
+deno run -A --unstable --allow-hrtime https://raw.githubusercontent.com/littletof/deno_bencher/master/run_benchmarks.ts --benches=./benchmarks/benchmarks.ts --json=./benchmarks/benchmarks.json --formatted=./benchmarks/benchmarks.txt -s -os -dv -date -metrics
 ```
 
 This will look for the file `./benchmarks/benchmarks.ts` (from `--benches` flag) dynamically import it and call `prepareBenchmarks()` on it if it exists. In it you can add all your benches that you want to run.
@@ -30,10 +30,10 @@ If your module has a `formatResults(results: BenchmarkRunResults): string` metho
 
 ## Restrict permissions of the script
 
-It needs `--unstable` (at least right now), and `--allow-net` because the dynamically imported module needs to download its imports.
+It needs `--unstable` (at least right now), and `--allow-net` because the dynamically imported module needs to download its imports. Setting `--allow-hrtime` makes the measurement more precise.
 
 ```batch
-deno run --allow-read=./benchmarks --allow-write=./benchmarks/benchmarks.json,./benchmarks/benchmarks.txt --unstable --allow-net https://raw.githubusercontent.com/littletof/deno_bencher/master/run_benchmarks.ts --json=./benchmarks/benchmarks.json --formatted=./benchmarks/benchmarks.txt -s -os -dv -date -metrics
+deno run --allow-hrtime --allow-read=./benchmarks --allow-write=./benchmarks/benchmarks.json,./benchmarks/benchmarks.txt --unstable --allow-net https://raw.githubusercontent.com/littletof/deno_bencher/master/run_benchmarks.ts --json=./benchmarks/benchmarks.json --formatted=./benchmarks/benchmarks.txt -s -os -dv -date -metrics
 ```
 
 ## As a Github Action / CI job
@@ -42,6 +42,7 @@ This script can be easily used to keep track of your code's performance during d
 
 # TODOS
 
+- [ ] Option to turn off default .json save and use only formatted
 - [ ] Format the measuredRunsMs array into a more compact format
 - [ ] make into a proper Github Action
 - [ ] add script to [deno.land/x/](https://deno.land/x)
