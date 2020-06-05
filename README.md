@@ -42,6 +42,7 @@ This script can be easily used to keep track of your code's performance during d
 
 # TODOS
 
+- [ ] Format the measuredRunsMs array into a more compact format
 - [ ] make into a proper Github Action
 - [ ] add script to [deno.land/x/](https://deno.land/x)
 - [ ] Tidy up
