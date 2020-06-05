@@ -22,7 +22,7 @@ jobs:
         with:
           deno-version: 1.0.5
       - name: Bench It
-        run: deno run --allow-read=./benchmarks --allow-write=./benchmarks/benchmarks_${{matrix.config.os}}.json,./benchmarks/benchmarks_${{matrix.config.os}}.txt --unstable --allow-net ./run_benchmarks.ts --json=./benchmarks/benchmarks_${{matrix.config.os}}.json --formatted=./benchmarks/benchmarks_${{matrix.config.os}}.txt -s -os -dv -date -metrics
+        run: deno run --allow-read=./benchmarks --allow-write=./benchmarks/benchmarks_${{matrix.config.os}}.json,./benchmarks/benchmarks_${{matrix.config.os}}.txt --unstable --allow-net https://raw.githubusercontent.com/littletof/deno_bencher/master/run_benchmarks.ts --json=./benchmarks/benchmarks_${{matrix.config.os}}.json --formatted=./benchmarks/benchmarks_${{matrix.config.os}}.txt -s -os -dv -date -metrics
       - name: Commit benchmarks
         uses: EndBug/add-and-commit@v4
         with:
@@ -32,7 +32,7 @@ jobs:
       
           # The message for the commit
           # Default: 'Commit from GitHub Actions'
-          message: Benchmarks
+          message: Benchmarks ${{matrix.config.os}}
       
           # Name of the branch to use, if different from the one that triggered the workflow
           # Default: the branch that triggered the workflow (from GITHUB_REF)
