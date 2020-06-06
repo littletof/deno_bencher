@@ -3,7 +3,7 @@ import {
   BenchmarkRunResult,
 } from "https://deno.land/std@0.56.0/testing/bench.ts";
 
-import { prettyBenchmarkResult } from "https://deno.land/x/pretty_benching@refactor_coloring/mod.ts";
+import { prettyBenchmarkResult } from "https://deno.land/x/pretty_benching/mod.ts";
 
 export function prepareBenchmarks() {
   bench({
@@ -46,7 +46,7 @@ export function formatResults(
       result += `${line || ""}\n`;
       return;
     },
-    nocolor: true
+    // nocolor: true
   })(results);
   return result;
 }
